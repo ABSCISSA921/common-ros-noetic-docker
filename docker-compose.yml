@@ -15,6 +15,12 @@ services:
       - QT_X11_NO_MITSHM=1
       - XCURSOR_THEME=Adwaita
       - XCURSOR_SIZE=24
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - HTTP_PROXY=http://127.0.0.1:7897
+      - HTTPS_PROXY=http://127.0.0.1:7897
+      - ALL_PROXY=socks5://127.0.0.1:7897
+      - NO_PROXY=localhost,127.0.0.1,::1
     volumes:
       # 映射 XWayland 图形套接字
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
@@ -23,6 +29,13 @@ services:
       - vscode-server-data:/root/.vscode-server
       - vscode-extensions:/root/.vscode/extensions
     ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 volumes:
   vscode-server-data:
   vscode-extensions:
