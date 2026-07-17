@@ -140,6 +140,6 @@ RUN echo '# 颜色化 bash' >> /root/.bashrc && \
     echo 'export ROBOT_TYPE=standard4' >> /root/.bashrc && \
     echo '[ ! -f devel/setup.bash ] || source devel/setup.bash' >> /root/.bashrc
 WORKDIR ${HOST_HOME_DIR}
-LABEL org.opencontainers.image.source=https://github.com/HydrogenZp/common-ros-noetic-docker
+LABEL org.opencontainers.image.source=https://github.com/ABSCISSA921/common-ros-noetic-docker
 LABEL org.opencontainers.image.description="Common ROS Noetic Docker Image with pre-configured tools"
 LABEL org.opencontainers.image.licenses=MIT
