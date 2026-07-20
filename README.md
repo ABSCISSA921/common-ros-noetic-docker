@@ -14,11 +14,11 @@ This project provides a containerized ROS Noetic development environment with co
 ## Features
 
 - **Base Image**: OSRF ROS Noetic desktop full
-- **Development Tools**: catkin_tools, rosinstall, wstool, build-essential, cmake
+- **Development Tools**: catkin_tools, rosinstall, wstool, build-essential, cmake, GitHub CLI, Node.js 24
 - **Debugging Tools**: rqt suite, RViz, PlotJuggler
 - **Navigation & SLAM**: navigation stack, gmapping, hector_mapping, robot_localization
 - **Motion Planning**: MoveIt
-- **Simulation**: Gazebo, ros_control
+- **Simulation**: Gazebo, ros_control, UPatras Gazebo plugins
 - **Communication**: rosbridge_server, tf2, actionlib
 - **Hardware Interface**: serial, joy, teleop packages
 - **Data Processing**: sensor_msgs, geometry_msgs, nav_msgs, message_filters
@@ -28,8 +28,10 @@ This project provides a containerized ROS Noetic development environment with co
 ### Build the Image
 
 ```bash
-docker-compose build
+docker compose build
 ```
+
+> This project uses the Docker Compose v2 plugin command `docker compose`. The legacy standalone `docker-compose` command is not required and may not exist on newer systems.
 
 Before first use, set this in `.env` at the project root:
 
@@ -40,7 +42,7 @@ HOST_HOME_DIR=/home/your-username
 ### Run the Container
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 > Dev Container startup speed tip:
@@ -99,8 +101,8 @@ If startup is still slow on first run, it's usually network-bound while download
 
 ## Dependencies
 
-- Docker
-- Docker Compose
+- Docker Engine
+- Docker Compose v2 plugin (`docker compose version`)
 - X11 server (for GUI applications)
 
 ## License

@@ -29,6 +29,17 @@ RUN apt-get update && \
         /etc/apt/sources.list.d/ros-latest.list && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros.gpg] https://mirrors.ustc.edu.cn/ros/ubuntu focal main" \
         > /etc/apt/sources.list.d/ros-latest.list && \
+    # 添加 GitHub CLI 和 Node.js 24 软件源
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        -o /etc/apt/keyrings/githubcli-archive-keyring.gpg && \
+    chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        > /etc/apt/sources.list.d/github-cli.list && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+        | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_24.x nodistro main" \
+        > /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && \
     # 对齐当前容器在构建时执行过的系统升级
     apt-get dist-upgrade -y && \
@@ -80,6 +91,11 @@ RUN apt-get update && \
         ros-noetic-rosmon-core \
         ros-noetic-rosmon-msgs \
         ros-noetic-ethercat-grant \
+        # rm_control Gazebo 二进制依赖（工作空间内无同名源码包）
+        ros-noetic-roboticsgroup-upatras-gazebo-plugins \
+        # 容器开发工具
+        gh \
+        nodejs \
         # 安装其他依赖
         python3-pip \
         python3-catkin-tools \

@@ -13,11 +13,11 @@
 ## 主要特性
 
 - **基础镜像**: OSRF ROS Noetic desktop full
-- **开发工具**: catkin_tools, rosinstall, wstool, build-essential, cmake
+- **开发工具**: catkin_tools、rosinstall、wstool、build-essential、cmake、GitHub CLI、Node.js 24
 - **调试工具**: rqt 套件、RViz、PlotJuggler
 - **导航与 SLAM**: navigation 导航栈、gmapping、hector_mapping、robot_localization
 - **运动规划**: MoveIt
-- **仿真环境**: Gazebo、ros_control
+- **仿真环境**: Gazebo、ros_control、UPatras Gazebo 插件
 - **通信工具**: rosbridge_server、tf2、actionlib
 - **硬件接口**: serial、joy、teleop 系列包
 - **数据处理**: sensor_msgs、geometry_msgs、nav_msgs、message_filters
@@ -27,8 +27,10 @@
 ### 构建镜像
 
 ```bash
-docker-compose build
+docker compose build
 ```
+
+> 本项目统一使用 Docker Compose v2 插件命令 `docker compose`。旧版独立命令 `docker-compose` 无需安装，并且在新环境中可能不存在。
 
 首次使用请先在项目根目录 `.env` 中设置：
 
@@ -39,7 +41,7 @@ HOST_HOME_DIR=/home/你的用户名
 ### 启动容器
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 > Dev Container 启动加速提示：
@@ -98,8 +100,8 @@ docker exec -it ros1_noetic_dev bash
 
 ## 依赖要求
 
-- Docker
-- Docker Compose
+- Docker Engine
+- Docker Compose v2 插件（`docker compose version`）
 - X11 服务器（用于图形界面应用）
 
 ## 许可证
